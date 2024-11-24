@@ -27,12 +27,16 @@ import check from "@/assets/images/check.png";
 import getStarted from "@/assets/images/get-started.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
+import toto1 from "@/assets/images/toto1.png";
+import toto2 from "@/assets/images/toto2.png";
 import onboarding1 from "@/assets/images/onboarding1.png";
 import onboarding2 from "@/assets/images/onboarding2.png";
 import onboarding3 from "@/assets/images/onboarding3.png";
 import signUpCar from "@/assets/images/signup-car.png";
 
 export const images = {
+  toto1,
+  toto2,
   onboarding1,
   onboarding2,
   onboarding3,
@@ -76,20 +80,20 @@ export const onboarding = [
     id: 1,
     title: "your ride is a tap away",
     description: "your journey begins with thapar taxi booking",
-    image: images.onboarding1,
+    image: images.toto1,
   },
   {
     id: 2,
     title: "best autos in your hands with thapar taxi booking",
     description: "discover the convenience of finding your perfect ride with thapar taxi booking",
-    image: images.onboarding2,
+    image: images.toto2,
   },
   {
     id: 3,
     title: "your ride, your way",
     description:
       "enter your destination, sit back, and let us take care of the rest",
-    image: images.onboarding3,
+    image: null,
   },
 ];
 

@@ -51,6 +51,7 @@ const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
           <Text className="text-sm font-JakartaRegular text-general-800">
             {item.car_seats} seats
           </Text>
+          
         </View>
       </View>
 

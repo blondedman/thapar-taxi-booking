@@ -29,28 +29,29 @@ const Profile = () => {
           <View className="flex flex-col items-start justify-start w-full">
             <InputField
               label="First Name"
-              placeholder={user?.firstName || "Not Found"}
+              placeholder="Shankhadeep"
+              // placeholder={user?.firstName || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"
-              editable={false}
+              editable={true}
             />
 
             <InputField
               label="Last Name"
-              placeholder={user?.lastName || "Not Found"}
+              placeholder="Maiti"
+              // placeholder={user?.lastName || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"
-              editable={false}
+              editable={true}
             />
 
             <InputField
               label="Email ID"
-              placeholder={
-                user?.primaryEmailAddress?.emailAddress || "Not Found"
-              }
+              placeholder="maitishankhadeep123@gmail.com"
+              // placeholder={user?.primaryEmailAddress?.emailAddress || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"
-              editable={false}
+              editable={true}
             />
 
             <InputField

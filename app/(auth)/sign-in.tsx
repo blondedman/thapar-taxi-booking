@@ -31,11 +31,11 @@ const SignIn = () => {
       } else {
         // See https://clerk.com/docs/custom-flows/error-handling for more info on error handling
         console.log(JSON.stringify(signInAttempt, null, 2));
-        Alert.alert("Error", "Log in failed.");
+        Alert.alert("ERROR", "Log in failed.");
       }
     } catch (err: any) {
       console.log(JSON.stringify(err, null, 2));
-      Alert.alert("Error", err.errors[0].longMessage);
+      Alert.alert("ERROR", err.errors[0].longMessage);
     }
   }, [isLoaded, form]);
 
@@ -51,8 +51,8 @@ const SignIn = () => {
 
         <View className="p-5">
           <InputField
-            label="Email"
-            placeholder="Enter email"
+            label="email"
+            placeholder="enter email"
             icon={icons.email}
             textContentType="emailAddress"
             value={form.email}
@@ -60,8 +60,8 @@ const SignIn = () => {
           />
 
           <InputField
-            label="Password"
-            placeholder="Enter password"
+            label="password"
+            placeholder="enter password"
             icon={icons.lock}
             secureTextEntry={true}
             textContentType="password"

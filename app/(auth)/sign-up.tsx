@@ -40,7 +40,7 @@ const SignUp = () => {
         } catch (err: any) {
           // https://clerk.com/docs/custom-flows/error-handling
             console.log(JSON.stringify(err, null, 2));
-            Alert.alert("Error", err.errors[0].longMessage);
+            Alert.alert("ERROR", err.errors[0].longMessage);
         }
     };
     const onPressVerify = async () => {
@@ -90,7 +90,7 @@ const SignUp = () => {
                     </Text>
                 </View>
             </View>
-            <View className="p-5">
+            <View className="p-5 bg-white">
                 <InputField
                     label="NAME"
                     placeholder="enter your name"

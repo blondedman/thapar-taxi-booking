@@ -16,7 +16,7 @@ const TabIcon = ({
         source={source}
         tintColor="white"
         resizeMode="center"
-        className="w-10 h-10"
+        className="w-12 h-12"
       />
     </View>
   </View>
@@ -53,16 +53,6 @@ export default function Layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.home} focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="rides"
-        options={{
-          title: "rides",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.list} focused={focused} />
           ),
         }}
       />
