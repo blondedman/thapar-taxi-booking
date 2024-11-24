@@ -6,7 +6,7 @@ import { useLocationStore } from '@/store'
 import * as Location from "expo-location"
 import { fetchAPI } from '@/lib/fetch'
 import { icons, images } from "@/constants";
-
+import { router } from 'expo-router'
 import {
   Text,
   View,
@@ -28,7 +28,14 @@ export default function Page() {
   const loading = false;
 
   const handleSignOut = () => {};
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+    router.push("/(root)/find-ride");
+  };
 
   const [hasPermissions, setHasPermissions] = useState<boolean>(false);
 
@@ -99,13 +106,20 @@ export default function Page() {
               >
                 <Image source={icons.out} className="w-4 h-4 " />
               </TouchableOpacity>
+              
             </View>
+
+            
 
             <GoogleTextInput
               icon={icons.search}
               containerStyle="bg-white"
               handlePress={handleDestinationPress}
             />
+
+            <Link href="../find-ride" className="text-lg text-center text-general-200 mt-5">
+              <Text className="text-primary-500">find-ride</Text>
+            </Link>
 
             <>
               <Text className="mx-3 text-xl font-JakartaBold mt-5 mb-3">Your Current Location</Text>
