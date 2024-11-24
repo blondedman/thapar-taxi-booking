@@ -25,7 +25,7 @@ const Profile = () => {
           />
         </View>
 
-        <View className="flex flex-col items-start justify-center bg-white rounded-lg shadow-sm shadow-neutral-300 px-5 py-3">
+        <View className="flex flex-col items-start justify-center bg-white rounded-2xl shadow-sm shadow-neutral-300 px-5 py-3">
           <View className="flex flex-col items-start justify-start w-full">
             <InputField
               label="First Name"

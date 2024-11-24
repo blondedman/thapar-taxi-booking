@@ -3,8 +3,7 @@ import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useEffect, useState} from "react"
 import { useLocationStore } from '@/store'
-import RideCard from "@/components/RideCard"
-import Map from "@/components/Map"
+import * as Location from "expo-location"
 import { fetchAPI } from '@/lib/fetch'
 import { icons, images } from "@/constants";
 
@@ -17,6 +16,10 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+import GoogleTextInput from '@/components/GoogleTextComponent'
+import RideCard from "@/components/RideCard"
+import Map from "@/components/Map"
+
 export default function Page() {
 
   const { setUserLocation, setDestinationLocation } = useLocationStore();
@@ -25,15 +28,37 @@ export default function Page() {
   const loading = false;
 
   const handleSignOut = () => {};
+  const handleDestinationPress = () => {};
 
-  const [hasPermission, setHasPermission] = useState<boolean>(false);
-  /*
-  useEffect(effect:()=> {
+  const [hasPermissions, setHasPermissions] = useState<boolean>(false);
+
+  useEffect( ()=> {
     const requestLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionAsync();
-    }
-  } , deps : [])
-  */
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status != 'granted') {
+        setHasPermissions(false)
+      }
+    
+      let location = await Location.getCurrentPositionAsync();
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: location.coords?.latitude,
+        longitude: location.coords?.longitude,
+        //latitude: 37.78825,
+        //longitude: -122.4324,
+        address: `${address[0].name}, ${address[0].region}`,
+      });
+    };
+
+    requestLocation();
+
+  } , [])
+
   return (
     <SafeAreaView>
       <FlatList
@@ -75,6 +100,12 @@ export default function Page() {
                 <Image source={icons.out} className="w-4 h-4 " />
               </TouchableOpacity>
             </View>
+
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white"
+              handlePress={handleDestinationPress}
+            />
 
             <>
               <Text className="mx-3 text-xl font-JakartaBold mt-5 mb-3">Your Current Location</Text>
