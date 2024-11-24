@@ -7,6 +7,7 @@ import * as Location from "expo-location"
 import { fetchAPI } from '@/lib/fetch'
 import { icons, images } from "@/constants";
 import { router } from 'expo-router'
+import { useAuth } from '@clerk/clerk-expo'
 import {
   Text,
   View,
@@ -26,8 +27,13 @@ export default function Page() {
   const { user } = useUser()
 
   const loading = false;
+  const { signOut } = useAuth();
 
-  const handleSignOut = () => {};
+  const handleSignOut = () => {
+    signOut();
+    router.replace("/(auth)/sign-in")
+  };
+
   const handleDestinationPress = (location: {
     latitude: number;
     longitude: number;
