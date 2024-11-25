@@ -29,7 +29,7 @@ const SignIn = () => {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace("/(root)/(tabs)/home");
       } else {
-        // See https://clerk.com/docs/custom-flows/error-handling for more info on error handling
+        // see https://clerk.com/docs/custom-flows/error-handling for more info on error handling
         console.log(JSON.stringify(signInAttempt, null, 2));
         Alert.alert("ERROR", "Log in failed.");
       }
