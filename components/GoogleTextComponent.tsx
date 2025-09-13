@@ -4,8 +4,7 @@ import { Image, View , Text} from "react-native"
 import { GooglePlacesAutocomplete} from "react-native-google-places-autocomplete"
 import { icons } from "@/constants";
 
-// const googlePlacesApiKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
-const googlePlacesApiKey = "AIzaSyCmMGhSW2MwWj06tNDDaP0as1kWROpj2IY";
+const googlePlacesApiKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
 
 const GoogleTextInput = ({
     icon, initialLocation, containerStyle, textInputBackgroundColor, handlePress,
@@ -54,7 +53,7 @@ const GoogleTextInput = ({
           });
         }}
         query={{
-          key: 'AIzaSyCmMGhSW2MwWj06tNDDaP0as1kWROpj2IY',
+          key: googlePlacesApiKey,
           language: "en",
         }}
         renderLeftButton={() => (
