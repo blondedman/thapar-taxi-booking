@@ -1,19 +1,37 @@
 import { router } from "expo-router";
 import { useRef, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, FlatList, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Swiper from "react-native-swiper";
 
 import CustomButton from "@/components/CustomButton";
 import { onboarding } from "@/constants";
 
 import "../../global.css"
 
+const { width } = Dimensions.get("window");
+
 const Home = () => {
-  const swiperRef = useRef<Swiper>(null);
+  const flatListRef = useRef<FlatList>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const isLastSlide = activeIndex === onboarding.length - 1;
+
+  const handleScroll = (event: any) => {
+    const scrollPosition = event.nativeEvent.contentOffset.x;
+    const index = Math.round(scrollPosition / width);
+    setActiveIndex(index);
+  };
+
+  const handleNext = () => {
+    if (isLastSlide) {
+      router.replace("/(auth)/sign-up");
+    } else {
+      flatListRef.current?.scrollToIndex({
+        index: activeIndex + 1,
+        animated: true,
+      });
+    }
+  };
 
   return (
     <SafeAreaView className="flex h-full items-center justify-between bg-white">
@@ -26,19 +44,20 @@ const Home = () => {
         <Text className="text-black text-md font-JakartaBold">SKIP</Text>
       </TouchableOpacity>
 
-      <Swiper
-        ref={swiperRef}
-        loop={false}
-        dot={
-          <View className="w-[32px] h-[4px] mx-1 bg-[#E2E8F0] rounded-full" />
-        }
-        activeDot={
-          <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
-        }
-        onIndexChanged={(index) => setActiveIndex(index)}
-      >
-        {onboarding.map((item) => (
-          <View key={item.id} className="flex items-center justify-center p-5">
+      <FlatList
+        ref={flatListRef}
+        data={onboarding}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View
+            style={{ width }}
+            className="flex items-center justify-center p-5"
+          >
             <Image
               source={item.image}
               className="w-full h-[300px]"
@@ -53,17 +72,24 @@ const Home = () => {
               {item.description}
             </Text>
           </View>
+        )}
+      />
+
+      <View className="flex flex-row justify-center items-center mb-5">
+        {onboarding.map((_, index) => (
+          <View
+            key={index}
+            className={`w-[32px] h-[4px] mx-1 rounded-full ${
+              index === activeIndex ? "bg-[#0286FF]" : "bg-[#E2E8F0]"
+            }`}
+          />
         ))}
-      </Swiper>
+      </View>
 
       <CustomButton
         title={isLastSlide ? "GET STARTED" : "NEXT"}
-        onPress={() =>
-          isLastSlide
-            ? router.replace("/(auth)/sign-up")
-            : swiperRef.current?.scrollBy(1)
-        }
-        className="w-80 mt-10 mb-5"
+        onPress={handleNext}
+        className="w-80 mt-5 mb-5"
       />
     </SafeAreaView>
   );
